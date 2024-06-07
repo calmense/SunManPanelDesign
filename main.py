@@ -243,6 +243,7 @@ with st.expander("Expand"):
         xaxis=dict(scaleanchor="y", scaleratio=1, fixedrange=True, visible=False),
         yaxis=dict(scaleanchor="x", scaleratio=1, fixedrange=True, visible=False),
         paper_bgcolor='white', 
+        plot_bgcolor='white', 
         showlegend=False)
 
 
