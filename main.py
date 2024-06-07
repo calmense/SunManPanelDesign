@@ -14,7 +14,7 @@ st.markdown("""<style>
 [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {width: 500px;}
 [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {width: 500px;margin-left: -500px;}
 footer:after{
-    content:"ARUP Deutschland GmbH | SunMan | Cal Mense";
+    content:"Arup Deutschland GmbH | SunMan Energy | Cal Mense";
     display:block;
     position:relative;
     color:grey;
@@ -39,9 +39,13 @@ heightCategories = [[0.5, 0.65, 0.85, 0.8, 1.05, 0.95, 1.25, 1.4], [0.65, 0.8, 1
 original_title = '<p style="font-family:Times; font-size: 60px;"> <span style="color:black;"></span>SunMan x <span style="color:rgb(230, 30, 40);">ARUP</span></p>'
 st.markdown(original_title, unsafe_allow_html=True)
 
-header = '<p style="font-family:Arial; color:rgb(0,0,0); font-size: 25px; font-weight: bold; ">SunMan eArc - Ultra-light, Glass-free Technology</p>'
+header = '<p style="font-family:Arial; color:rgb(0,0,0); font-size: 25px; font-weight: bold; ">SunMan Solar Panels - Ultra-light, Glass-free Technology</p>'
 st.markdown(header, unsafe_allow_html=True)
-st.write('The program bears no responsibility for any errors. It is advised to verify the results.')
+st.write('This web tool provides a structural framework for adhering solar panels directly onto roofs without the need for screws. \
+         The panels are made from a durable, glass-free organic polymer composite that excels in various climatic conditions and extreme temperatures. \
+         Please note that the tool does not assume responsibility for any errors, and users are advised to verify the results independently.')
+
+
 
 
 
@@ -151,91 +155,99 @@ with st.expander("Expand"):
     st.latex(r"\text{Velocity Pressure }" + ' q_{p} = ' + str(velocityPressure) + 'N/mm^2')
     st.latex(r"\text{Additional Factor }" + ' \chi = ' + str(additionalFactor))
     st.latex(r"\text{Partial Safety Factor }" + ' \psi = ' + str(partialSafetyFactor))
+    st.write("")
+    st.latex(r"\text{Wind Loading }" + 'kN/m^2')
     st.plotly_chart(fig)
-st.latex(r"\textbf{Panel Design}")
-col1, col2 = st.columns(2)
-with col1:
-    panelSize = st.selectbox('Panel Size', [1, 2])
-with col2:
-    gluingConfig = st.selectbox('Gluing Configuration Size', [1, 2])
 
-gapx = 0
-gapy = 0
 
-# solar panel
-if panelSize == 1:
-    width = 1080
-    height = 2054
+st.latex(r"\textbf{Solar Panel Design}")
+with st.expander("Expand"):
+
+    col1, col2 = st.columns(2)
+    with col1:
+        panelSize = st.selectbox('Panel Size', [1, 2])
+    with col2:
+        gluingConfig = st.selectbox('Gluing Configuration Size', [1, 2])
+
+    gapx = 0
+    gapy = 0
+
+    # solar panel
+    if panelSize == 1:
+        width = 1080
+        height = 2054
+        
+    else:
+        width = 1197
+        height = 2246
+
+    if gluingConfig == 1:
+        if panelSize == 1:
+            distance = (height - 100) / 4
+            linesXCoords = [[gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx]]
+            linesYCoords = [[gapy + 50, gapy + 50], [gapy + 50 + distance, gapy + 50 + distance], [gapy + 50 + distance*2, gapy + 50 + distance*2], [gapy + 50 + distance*3, gapy + 50 + distance*3], [gapy + 50 + distance*4, gapy + 50 + distance*4]]
+        else:
+            distance = (height - 100) / 5
+            linesXCoords = [[gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx]]
+            linesYCoords = [[gapy + 50, gapy + 50], [gapy + 50 + distance, gapy + 50 + distance], [gapy + 50 + distance*2, gapy + 50 + distance*2], [gapy + 50 + distance*3, gapy + 50 + distance*3], [gapy + 50 + distance*4, gapy + 50 + distance*4], [gapy + 50 + distance*5, gapy + 50 + distance*5]]
     
-else:
-    width = 1197
-    height = 2246
+    elif gluingConfig == 2:
+        if panelSize == 1:
+            distance = (width - 100) / 2
+            linesXCoords = [[gapx + 50, gapx + 50], [gapx + 50 + distance, gapx + 50 + distance], [gapx + 50 + distance*2, gapx + 50 + distance*2]]
+            linesYCoords = [[gapx, gapx + height], [gapx, gapx + height], [gapx, gapx + height]]
+        else:
+            distance = (width - 100) / 3
+            linesXCoords = [[gapx + 50, gapx + 50], [gapx + 50 + distance, gapx + 50 + distance], [gapx + 50 + distance*2, gapx + 50 + distance*2], [gapx + 50 + distance*3, gapx + 50 + distance*3]]
+            linesYCoords = [[gapx, gapx + height], [gapx, gapx + height], [gapx, gapx + height], [gapx, gapx + height]]
 
-if gluingConfig == 1:
-    if panelSize == 1:
-        distance = (height - 100) / 4
-        linesXCoords = [[gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx]]
-        linesYCoords = [[gapy + 50, gapy + 50], [gapy + 50 + distance, gapy + 50 + distance], [gapy + 50 + distance*2, gapy + 50 + distance*2], [gapy + 50 + distance*3, gapy + 50 + distance*3], [gapy + 50 + distance*4, gapy + 50 + distance*4]]
-    else:
-        distance = (height - 100) / 5
-        linesXCoords = [[gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx]]
-        linesYCoords = [[gapy + 50, gapy + 50], [gapy + 50 + distance, gapy + 50 + distance], [gapy + 50 + distance*2, gapy + 50 + distance*2], [gapy + 50 + distance*3, gapy + 50 + distance*3], [gapy + 50 + distance*4, gapy + 50 + distance*4], [gapy + 50 + distance*5, gapy + 50 + distance*5]]
- 
-elif gluingConfig == 2:
-    if panelSize == 1:
-        distance = (width - 100) / 2
-        linesXCoords = [[gapx + 50, gapx + 50], [gapx + 50 + distance, gapx + 50 + distance], [gapx + 50 + distance*2, gapx + 50 + distance*2]]
-        linesYCoords = [[gapx, gapx + height], [gapx, gapx + height], [gapx, gapx + height]]
-    else:
-        distance = (width - 100) / 3
-        linesXCoords = [[gapx + 50, gapx + 50], [gapx + 50 + distance, gapx + 50 + distance], [gapx + 50 + distance*2, gapx + 50 + distance*2], [gapx + 50 + distance*3, gapx + 50 + distance*3]]
-        linesYCoords = [[gapx, gapx + height], [gapx, gapx + height], [gapx, gapx + height], [gapx, gapx + height]]
+    scaleY = height / 400
+    scaleX = 400 / height
 
-scaleY = height / 400
-scaleX = 400 / height
+    fig = go.Figure(go.Scatter(x=[gapx + 0,gapx + width,gapx + width,gapx + 0, gapx + 0], 
+                            y=[0 + gapy,0 + gapy, height + gapy,height + gapy, 0 + gapy], 
+                            line=dict(color='darkgrey'),
+                            mode="lines",
+                            fillcolor='lightgrey',  
+                            fill="toself",
+                            opacity=0))
 
-fig = go.Figure(go.Scatter(x=[gapx + 0,gapx + width,gapx + width,gapx + 0, gapx + 0], 
-                        y=[0 + gapy,0 + gapy, height + gapy,height + gapy, 0 + gapy], 
-                        line=dict(color='darkgrey'),
-                        mode="lines",
-                        fillcolor='lightgrey',  
-                        fill="toself",
-                        opacity=0))
+    # hatching
+    pyLogo = Image.open("hatch.png")
+    fig.add_layout_image(
+            dict(source=pyLogo, xref="x", yref="y",
+                x = gapx, y = gapy + height,
+                sizex = width, sizey = height,
+                sizing = "stretch",
+                layer="below"))
 
-# hatching
-pyLogo = Image.open("hatch.png")
-fig.add_layout_image(
-        dict(source=pyLogo, xref="x", yref="y",
-            x = gapx, y = gapy + height,
-            sizex = width, sizey = height,
-            sizing = "stretch",
-            layer="below"))
+    def draw_line(fig, xList, yList, size, color, opacity):
+        fig.add_trace(go.Scatter(x = list(reversed(xList)), y = list(reversed(yList)), 
+                                mode="lines", line=dict(color=color, width=size / 5), opacity=opacity))
 
-def draw_line(fig, xList, yList, size, color, opacity):
-    fig.add_trace(go.Scatter(x = list(reversed(xList)), y = list(reversed(yList)), 
-                             mode="lines", line=dict(color=color, width=size / 5), opacity=opacity))
+    for i in range(len(linesYCoords)):
+        draw_line(fig, linesXCoords[i], linesYCoords[i], 12, "red", 1)
 
-for i in range(len(linesYCoords)):
-    draw_line(fig, linesXCoords[i], linesYCoords[i], 12, "red", 1)
+    #____________________TEXT____________________
+    # text sizes
+    titleSize = + 20
 
-#____________________TEXT____________________
-# text sizes
-titleSize = + 20
-
-# update layout
-fig.update_layout(
-    autosize=False,
-    width = 800,
-    height = 700,
-    uirevision='static',
-    xaxis=dict(scaleanchor="y", scaleratio=1, fixedrange=True, visible=False),
-    yaxis=dict(scaleanchor="x", scaleratio=1, fixedrange=True, visible=False),
-    showlegend=False)
+    # update layout
+    fig.update_layout(
+        autosize=False,
+        width = 800,
+        height = 700,
+        uirevision='static',
+        xaxis=dict(scaleanchor="y", scaleratio=1, fixedrange=True, visible=False),
+        yaxis=dict(scaleanchor="x", scaleratio=1, fixedrange=True, visible=False),
+        paper_bgcolor='white'  # Color of the entire background
+        showlegend=False)
 
 
-# Hide the axis
-fig.update_xaxes(showline=False, showgrid=False, zeroline=False)
-fig.update_yaxes(showline=False, showgrid=False, zeroline=False)
+    # Hide the axis
+    fig.update_xaxes(showline=False, showgrid=False, zeroline=False)
+    fig.update_yaxes(showline=False, showgrid=False, zeroline=False)
 
-
-st.write(fig)
+    st.write("")
+    st.latex(r"\text{SunMan Solar Panel - Gluing Configuration }")
+    st.write(fig)
