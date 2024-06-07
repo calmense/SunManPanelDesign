@@ -9,7 +9,7 @@ from PIL import Image
 # from würth_screws_functions import get_length, ec5_87_tragfähigkeit_vg, get_min_distances_axial, get_min_distances_shear
 
 # HTML Einstellungen
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="SunMan x ARUP", layout="wide")
 st.markdown("""<style>
 [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {width: 500px;}
 [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {width: 500px;margin-left: -500px;}
@@ -176,10 +176,12 @@ with st.expander("Expand"):
     if panelSize == 1:
         width = 1080
         height = 2054
+        area = width * height
         
     else:
         width = 1197
         height = 2246
+        area = width * height
 
     if gluingConfig == 1:
         if panelSize == 1:
@@ -235,13 +237,12 @@ with st.expander("Expand"):
     # update layout
     fig.update_layout(
         autosize=False,
-        width = 800,
+        width = 500,
         height = 700,
         uirevision='static',
         xaxis=dict(scaleanchor="y", scaleratio=1, fixedrange=True, visible=False),
         yaxis=dict(scaleanchor="x", scaleratio=1, fixedrange=True, visible=False),
-        paper_bgcolor='white',
-        plot_bgcolor='white', 
+        paper_bgcolor='white', 
         showlegend=False)
 
 
@@ -249,6 +250,33 @@ with st.expander("Expand"):
     fig.update_xaxes(showline=False, showgrid=False, zeroline=False)
     fig.update_yaxes(showline=False, showgrid=False, zeroline=False)
 
-    st.write("")
-    st.latex(r"\text{SunMan Solar Panel - Gluing Configuration }")
-    st.write(fig)
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write("")
+        st.latex(r"\text{SunMan Solar Panel - Gluing Configuration }")
+        st.write(fig)
+
+    with col2:
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+
+
+        st.latex(r"\textbf{Solar Panel}")
+        st.latex(r"\text{Width }" + ' B = ' + str(width) + ' mm')
+        st.latex(r"\text{Length }" + ' L = ' + str(height) + ' mm')
+        st.latex(r"\text{Area }" + ' A = ' + str(round(area*0.001**2,1)) + ' m^2')
