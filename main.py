@@ -240,7 +240,7 @@ with st.expander("Expand"):
         uirevision='static',
         xaxis=dict(scaleanchor="y", scaleratio=1, fixedrange=True, visible=False),
         yaxis=dict(scaleanchor="x", scaleratio=1, fixedrange=True, visible=False),
-        paper_bgcolor='white'  # Color of the entire background
+        paper_bgcolor='white',
         showlegend=False)
 
 
