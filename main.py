@@ -6,8 +6,6 @@ import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
 
-# from würth_screws_functions import get_length, ec5_87_tragfähigkeit_vg, get_min_distances_axial, get_min_distances_shear
-
 # HTML Einstellungen
 st.set_page_config(page_title="SunMan x ARUP", layout="wide")
 st.markdown("""<style>
