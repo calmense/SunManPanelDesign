@@ -2,7 +2,7 @@
 
 # SunMan Solar Panel Designer - Web Tool
 
-## Ultra-light, Glass-free Technology
+### Ultra-light, Glass-free Technology
 
 This web tool provides a structural framework for adhering solar panels directly onto roofs without the need for screws. The panels are made from a durable, glass-free organic polymer composite that excels in various climatic conditions and extreme temperatures.
 
