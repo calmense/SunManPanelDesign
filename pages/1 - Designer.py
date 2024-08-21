@@ -7,9 +7,7 @@ from utils import *
 
 
 # Set page configuration
-st.set_page_config(page_title="Initial Evaluation", layout="wide")
-
-
+st.set_page_config(page_title="Designer", layout="wide")
 
 st.markdown(
     """
