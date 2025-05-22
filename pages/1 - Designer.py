@@ -1,4 +1,4 @@
-from utils.wind_load_calc import *
+from utils.helpers import *
 from utils.glue_resistance_calc import glue_resistance_section
 from utils.summary_report import summary_report_section
 
