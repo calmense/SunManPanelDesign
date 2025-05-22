@@ -185,7 +185,7 @@ def generate_pdf_summary(
         panel_image_path = tmpfile.name
 
     # Export the Plotly figure to PNG
-    img_check = pio.to_image(figCheck, format="png", width=800, height=240)
+    img_check = pio.to_image(figCheck, format="png", width=800, height=260)
 
     # Save the PNG to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmpfile:
