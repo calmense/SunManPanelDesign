@@ -2,7 +2,6 @@ from math import pi, sqrt, cos, sin, atan
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.table import Table
 
 # Nested list containing all categories data
 categories = [
