@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils.wind_load_calc import load_calculation_section
+from utils.wind_load_calc import *
 from utils.glue_resistance_calc import glue_resistance_section
 from utils.summary_report import summary_report_section
 
