@@ -5,7 +5,6 @@ import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
-from utils import *
 
 # from würth_screws_functions import get_length, ec5_87_tragfähigkeit_vg, get_min_distances_axial, get_min_distances_shear
 
@@ -71,7 +70,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 original_title = '<p style="font-family:Times; font-size: 60px;"> <span style="color:black;"></span>SunMan x <span style="color:rgb(230, 30, 40);">ARUP</span></p>'
-st.image("Sunman_logo.png", width = 300)
+st.image("images/Sunman_logo.png", width = 300)
 # st.markdown(original_title, unsafe_allow_html=True)
 
 # header = '<p style="font-family:Arial; color:rgb(0,0,0); font-size: 25px; font-weight: bold; ">SunMan Solar Panels - Ultra-light, Glass-free Technology</p>'
@@ -87,22 +86,12 @@ st.write("")
 
 col1, col2 = st.columns([40,70])
 with col1:
-    st.image("title_image.png", width=450)
+    st.image("images/title_image.png", width=450)
 with col2:
 
 
-    st.markdown('<h3 class="subsubheader">SunMan eArc - Ultra-light, Glass-free Technology</h3>', unsafe_allow_html=True)
-    st.markdown("""
-        <style>
-        .text {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            color: black;
-            line-height: 1.5;
-        }
-        </style>
-        <h3 class="text">
-            This document provides structural guidance for adhering solar panels directly to roofs without the need for screw penetrations.<br>
-            The solar panels utilize an organic polymer composite, devoid of glass, known for its exceptional durability in withstanding diverse climatic conditions and extreme temperatures.
-        </h3>
-    """, unsafe_allow_html=True)
+    st.write('This document provides structural guidance for adhering solar panels directly to roofs without the need for screw penetrations. \
+        The solar panels utilize an organic polymer composite, devoid of glass, known for its exceptional durability in withstanding diverse climatic conditions and extreme temperatures. \
+    ')
+
+    st.write('For more information, please visit: [https://de.sunman-energy.com/](https://de.sunman-energy.com/)')
