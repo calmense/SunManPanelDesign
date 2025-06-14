@@ -151,13 +151,12 @@ def glue_resistance_section(wd, figBuilding):
         glueWidthUtil = [int( 100 *glueWidthReq[i] * utilTarget / (glueWidthChos[i])) for i in range(len(glueWidthChos))]
         check = ["✅" if x < 100 else "❌" for x in glueWidthUtil]
 
-        colHeader = ["Wind Load [N/mm2]", "Glue Width [mm]", "Glue Width [mm]", "Utilization [%]", "Check"]
-        colExpl = ["w_d", "req. glue per panel", "chosen glue width", "-", "-"]
+        colHeader = ["Wind Load [N/mm2]", "Glue Width [mm]"]
+        colExpl = ["w_d", "req. glue per panel"]
 
-        colF = [str(abs(wd[0])) , str(round(glueWidthReq[0])), str(int(glueWidthChos[0])), str(glueWidthUtil[0]) + "%", str(check[0])]
-        colG = [str(abs(wd[1])) , str(round(glueWidthReq[1])), str(int(glueWidthChos[1])), str(glueWidthUtil[1]) + "%", str(check[0])]
-        colH = [str(abs(wd[2])) , str(round(glueWidthReq[2])), str(int(glueWidthChos[2])), str(glueWidthUtil[2]) + "%", str(check[0])]
-
+        colF = [str(abs(wd[0])) , str(round(glueWidthReq[0]))]
+        colG = [str(abs(wd[1])) , str(round(glueWidthReq[1]))]
+        colH = [str(abs(wd[2])) , str(round(glueWidthReq[2]))]
 
         # Create the table
         figCheck = go.Figure(data=[go.Table(

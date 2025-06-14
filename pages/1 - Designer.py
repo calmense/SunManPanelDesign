@@ -1,11 +1,7 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from utils.wind_load_calc import *
 from utils.glue_resistance_calc import glue_resistance_section
 from utils.summary_report import summary_report_section
+from utils.quantities import quantities
 
 import streamlit as st
 import plotly.graph_objects as go
@@ -65,6 +61,8 @@ if acknowledgement:
                               terrainCategories, fundBasicWindVelocities,
                               categories, heights)
     glue_results = glue_resistance_section(load_results["wd"], load_results["figTable"])
+    
+    quantities(glue_results["numberGlueLines"], glue_results["glueLength"],  glue_results["glueWidthReq"])
 
     # Figures are part of your workflow
     summary_report_section(
