@@ -100,11 +100,11 @@ def generate_pdf_summary(
     
     # Base Velocity Pressure
     pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, "1.1 Base Velocity Pressure", ln=True)
+    pdf.cell(0, 8, "1.1 Project Details", ln=True)
 
     pdf.set_font("Arial", "I", 9)
     pdf.set_text_color(100)  # grey
-    pdf.cell(0, 8, "EN 1991-1-4 Equation 4.1", ln=True)
+    pdf.cell(0, 8, "Base Velocity Pressure - EN 1991-1-4 Equation 4.1", ln=True)
     pdf.set_text_color(0)  # black
 
     pdf.set_font("Arial", "", 11)
@@ -116,13 +116,9 @@ def generate_pdf_summary(
     pdf.ln(1)
 
     # Gust Speed Pressure
-    pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, "", ln=True)
-    pdf.cell(0, 8, "1.2 Gust Speed Pressure", ln=True)
-
     pdf.set_font("Arial", "I", 9)
     pdf.set_text_color(100)  # grey
-    pdf.cell(0, 8, "EN 1991-1-4 Table 4.1", ln=True)
+    pdf.cell(0, 8, "Gust Speed Pressure - EN 1991-1-4 Table 4.1", ln=True)
     pdf.set_text_color(0)  # black
     
     pdf.set_font("Arial", "", 11)
@@ -141,11 +137,6 @@ def generate_pdf_summary(
     pdf.set_text_color(100)  # grey
     pdf.cell(0, 8, "Wind Load EN 1991-4 Ch. 7.2.3 - External Pressure Coefficients", ln=True)
     pdf.set_text_color(0)  # black
-
-    pdf.set_font("Arial", "", 11)
-    pdf.cell(0, 8, f"Building Length: {buildingLength} m", ln=True)
-    pdf.cell(0, 8, f"Building Width: {buildingWidth} m", ln=True)
-
 
     # image
     pdf.insert_plot_image(building_image_path, "Roof geometry and zones", 120, 10, 210)
@@ -185,7 +176,7 @@ def generate_pdf_summary(
         panel_image_path = tmpfile.name
 
     # Export the Plotly figure to PNG
-    img_check = pio.to_image(figCheck, format="png", width=800, height=260)
+    img_check = pio.to_image(figCheck, format="png", width=800, height=240)
 
     # Save the PNG to a temporary file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmpfile:

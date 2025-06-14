@@ -38,14 +38,18 @@ def glue_resistance_section(wd, figBuilding):
 
         # solar panel
         if panelSize == "SMF430":
+            numberGlueLines = 5
             width = 1080
             height = 2054
             area = width * height
             
         else:
+            numberGlueLines = 6
             width = 1197
             height = 2246
             area = width * height
+
+        glueLength = numberGlueLines*width
 
         if panelSize == "SMF430":
             gluingDistance = (height - 100) / 4
@@ -56,9 +60,6 @@ def glue_resistance_section(wd, figBuilding):
             linesXCoords = [[gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx]]
             linesYCoords = [[gapy + 50, gapy + 50], [gapy + 50 + gluingDistance, gapy + 50 + gluingDistance], [gapy + 50 + gluingDistance*2, gapy + 50 + gluingDistance*2], [gapy + 50 + gluingDistance*3, gapy + 50 + gluingDistance*3], [gapy + 50 + gluingDistance*4, gapy + 50 + gluingDistance*4], [gapy + 50 + gluingDistance*5, gapy + 50 + gluingDistance*5]]
 
-
-        scaleY = height / 400
-        scaleX = 400 / height
 
         figPanel = go.Figure(go.Scatter(x=[gapx + 0,gapx + width,gapx + width,gapx + 0, gapx + 0], 
                                 y=[0 + gapy,0 + gapy, height + gapy,height + gapy, 0 + gapy], 
@@ -158,6 +159,7 @@ def glue_resistance_section(wd, figBuilding):
         colG = [str(abs(wd[1])) , str(round(glueWidthReq[1]))]
         colH = [str(abs(wd[2])) , str(round(glueWidthReq[2]))]
 
+
         # Create the table
         figCheck = go.Figure(data=[go.Table(
             header=dict(values=['Roof area', 'Explanation'] + headers,  # Adding 'Roof Area' and other headers
@@ -196,4 +198,6 @@ def glue_resistance_section(wd, figBuilding):
             "glueWidthReq": glueWidthReq,
             "glueWidthChos": glueWidthChos,
             "glueWidthUtil": glueWidthUtil,
+            "numberGlueLines": numberGlueLines,
+            "glueLength": glueLength
         }
