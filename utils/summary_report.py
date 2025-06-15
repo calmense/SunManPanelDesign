@@ -2,8 +2,16 @@ import streamlit as st
 import plotly.graph_objects as go
 from utils.pdf_utils import generate_pdf_summary
 
-def summary_report_section(load_results, glue_results, figBuilding, figTable, figCheck, figPanel):
-    
+def summary_report_section(load_results, glue_results, quantities_results):
+
+    figBuilding = load_results["figBuilding"]
+    figTable = load_results["figTable"]
+    figCheck = glue_results["figCheck"]
+    figPanel = glue_results["figPanel"]
+
+    numberTubes = quantities_results["numberTubes"]
+    numberTubesFact = quantities_results["numberTubesFact"]
+
     st.write("")
     st.write("")
     st.write("")
@@ -50,7 +58,7 @@ def summary_report_section(load_results, glue_results, figBuilding, figTable, fi
                 panelSize, width, height, area, gluingDistance,
                 designGlueJointResistance, designGlueJointResistanceValue,
                 glueWidthReq, glueWidthChos, glueWidthUtil, 
-                figBuilding, figTable, figPanel, figCheck,
+                figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
                 logo_path="images/Sunman_logo.png",
                 country_path=imageCountry
             )

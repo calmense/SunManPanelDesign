@@ -151,8 +151,8 @@ def load_calculation_section(countries, windZones, imagesCountry,
             buildingWidth = int(st.text_input('Building Width [m]', 20))
 
 
-        gapx = 20
-        gapy = 20
+        gapx = 10
+        gapy = 10
 
         figBuilding = go.Figure(go.Scatter(x=[gapx + 0,gapx + buildingLength, gapx + buildingLength,gapx + 0, gapx + 0], 
                                 y=[0 + gapy,0 + gapy, buildingWidth + gapy, buildingWidth + gapy, 0 + gapy], 
@@ -194,61 +194,60 @@ def load_calculation_section(countries, windZones, imagesCountry,
         factor = 7
 
         # dimension width
-        xList = [gapx-10*scaleX, gapx-10*scaleX]
+        xList = [gapx - 6 * scaleX, gapx - 6 * scaleX]
         yList = [gapy, gapy+buildingWidth]
         draw_arrow(figBuilding, xList, yList, "Y", scaleX/factor, scaleY/factor)
 
         xList = [gapx, gapx+buildingLength]
-        yList = [gapy+buildingWidth+10*scaleY, gapy+buildingWidth+10*scaleY]
+        yList = [gapy+buildingWidth + 6 * scaleY, gapy + buildingWidth + 6 * scaleY]
         draw_arrow(figBuilding, xList, yList, "X", scaleX/factor, scaleY/factor)
 
-        xList = [gapx-5*scaleX, gapx-5*scaleX]
+        xList = [gapx - 3.5 * scaleX, gapx - 3.5 * scaleX]
         yList = [gapy+buildingWidth-e_4_2, gapy+buildingWidth]
         draw_arrow(figBuilding, xList, yList, "Y", scaleX/factor, scaleY/factor)
 
         xList = [gapx, gapx+e_4_1]
-        yList = [gapy+buildingWidth+5*scaleY, gapy+buildingWidth+5*scaleY]
+        yList = [gapy+buildingWidth + 3.5 * scaleY, gapy+buildingWidth + 3.5 * scaleY]
         draw_arrow(figBuilding, xList, yList, "X", scaleX/factor, scaleY/factor)
 
         xList = [gapx, gapx+e_10_2]
-        yList = [gapy-5*scaleY, gapy-5*scaleY]
+        yList = [gapy-3*scaleY, gapy-3*scaleY]
         draw_arrow(figBuilding, xList, yList, "X", scaleX/factor, scaleY/factor)
 
-        xList = [gapx-5*scaleX, gapx-5*scaleX]
+        xList = [gapx-3*scaleX, gapx-3*scaleX]
         yList = [gapy, gapy+e_10_1]
         draw_arrow(figBuilding, xList, yList, "Y", scaleX/factor, scaleY/factor)
 
         # text
-        x = gapx-10*scaleX
+        x = gapx - 8 * scaleX
         y = gapy+buildingWidth/2
         add_text(figBuilding, buildingWidth, x , y, 15)
 
         x = gapx+buildingLength/2
-        y = gapy+buildingWidth+9*scaleY
+        y = gapy+buildingWidth + 7 * scaleY
         add_text(figBuilding, buildingLength, x , y, 15)
 
-        x = gapx-4*scaleX
+        x = gapx - 3 * scaleX
         y = gapy+e_10_1/2
         add_text(figBuilding, e_10_1, x , y, 15)
 
-        x = gapx-4*scaleX
+        x = gapx - 3 * scaleX
         y = gapy+buildingWidth-e_4_2/2
         add_text(figBuilding, e_4_2, x , y, 15)
 
         x = gapx+e_10_2+1*scaleX
-        y = gapy-5*scaleY
+        y = gapy-3*scaleY
         add_text(figBuilding, e_10_2, x , y, 15)
 
         x = gapx+e_4_1+1*scaleX
-        y = gapy+buildingWidth+5*scaleY
+        y = gapy+buildingWidth+3*scaleY
         add_text(figBuilding, e_4_1, x , y, 15)
 
-
-        x = gapx+buildingLength/2-2*scaleX
+        x = gapx+buildingLength/2-scaleX
         y = gapy+e_10_1/2
         add_text(figBuilding, "Area G", x , y, 15)
 
-        x = gapx+buildingLength/2-2*scaleX
+        x = gapx+buildingLength/2-scaleX
         y = gapy+buildingWidth/2
         add_text(figBuilding, "Area H", x , y, 15)
 

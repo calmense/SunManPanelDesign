@@ -62,13 +62,11 @@ if acknowledgement:
                               categories, heights)
     glue_results = glue_resistance_section(load_results["wd"], load_results["figTable"])
     
-    quantities(glue_results["numberGlueLines"], glue_results["glueLength"],  glue_results["glueWidthReq"])
+    quantities_results = quantities(glue_results["numberGlueLines"], glue_results["glueLength"],  glue_results["glueWidthReq"])
 
     # Figures are part of your workflow
     summary_report_section(
-        load_results, glue_results,
-        figBuilding=load_results["figBuilding"],
-        figTable=load_results["figTable"],
-        figCheck=glue_results["figCheck"],
-        figPanel=glue_results["figPanel"]
+        load_results, 
+        glue_results,
+        quantities_results
     )

@@ -84,14 +84,12 @@ def quantities(numberGlueLines, width, glueWidthReq):
             st.write("<b>Total number of tubes: " + str(numberTubesFact)+ ' (incl. 10%)</b>', unsafe_allow_html=True)
             st.markdown("<b>Note:</b> It is advised to consider a waste factor of 10%.", unsafe_allow_html=True)
 
-
-
             st.write("")
             st.write("")
             st.write("")
-
-            
 
         return {
             "width": width,
+            "numberTubes": numberTubes,
+            "numberTubesFact": numberTubesFact
         }

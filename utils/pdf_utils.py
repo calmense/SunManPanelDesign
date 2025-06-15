@@ -58,7 +58,7 @@ def generate_pdf_summary(
     panelSize, width, height, area, gluingDistance,
     designGlueJointResistance, designGlueJointResistanceValue,
     glueWidthReq, glueWidthChos, glueWidthUtil, 
-    figBuilding, figTable, figPanel, figCheck,
+    figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
     panel_image_path=None,
     logo_path="images/Sunman_logo.png",
     country_path="images/Country_image.png"
@@ -114,12 +114,16 @@ def generate_pdf_summary(
     pdf.cell(0, 8, f"Base Velocity Pressure: {baseVelocityPressure} kN/m²", ln=True)
 
     pdf.ln(1)
+    pdf.cell(0, 8, "", ln=True)
+
 
     # Gust Speed Pressure
     pdf.set_font("Arial", "I", 9)
     pdf.set_text_color(100)  # grey
     pdf.cell(0, 8, "Gust Speed Pressure - EN 1991-1-4 Table 4.1", ln=True)
     pdf.set_text_color(0)  # black
+
+    # pdf.insert_plot_image(country_path, "Roof geometry and zones", 80, 100, 70)
     
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, f"Terrain Category: {terrainCategory}", ln=True)
@@ -128,42 +132,29 @@ def generate_pdf_summary(
 
     pdf.ln(1)
 
-    # Roof Geometry
+    # images
+    pdf.image(country_path, w=70, x=115, y=65)
+    pdf.image(building_image_path, w=90, x=105, y=120)
+
+    # Design Wind Load
+    pdf.set_text_color(0)  # black
     pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 8, "", ln=True)
-    pdf.cell(0, 8, "1.3 Roof Geometry", ln=True)
-
+    pdf.cell(0, 8, "1.2 Design Wind Load", ln=True)
     pdf.set_font("Arial", "I", 9)
     pdf.set_text_color(100)  # grey
     pdf.cell(0, 8, "Wind Load EN 1991-4 Ch. 7.2.3 - External Pressure Coefficients", ln=True)
-    pdf.set_text_color(0)  # black
-
-    # image
-    pdf.insert_plot_image(building_image_path, "Roof geometry and zones", 120, 10, 210)
-
-    # --- Page break before glue section ---
-    pdf.add_page()
-
-    # Design Wind Load
-    pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, "", ln=True)
-    pdf.cell(0, 8, "1.4 Design Wind Load", ln=True)
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, "The design wind load is determined for each roof area.", ln=True)
-    pdf.set_font("Arial", "I", 9)
-    pdf.set_text_color(100)  # grey
-    pdf.cell(0, 8, "DIN EN 1991-1-4 Chapter 7.2.3", ln=True)
+    pdf.image(table_image_path, w=170, x=10, y=195)
 
     pdf.ln(3)
-
-    # image
-    pdf.insert_plot_image(table_image_path, "Design Wind Load", 140, 10, 85)
 
     # page break
     pdf.add_page()
 
     # ----------------------------
-    # Page 3: Glue Joint Resistance
+    # Page 2: Glue Joint Resistance
     # ----------------------------
 
     # images
@@ -183,6 +174,16 @@ def generate_pdf_summary(
         tmpfile.write(img_check)
         check_image_path = tmpfile.name
 
+    pdf.set_font("Arial", "I", 11)
+    pdf.set_text_color(0)  # black
+    pdf.multi_cell(0, 6, (
+    "Glue joint resistance must be verified by the manufacturer according to European standards. "
+    "If not ETAG-approved, it requires reduction using Eurocode safety factors; if ETAG-approved, no further "
+    "reduction is necessary due to included safety margins."
+    ))  
+
+    pdf.cell(0, 8, "", ln=True)
+    
     pdf.set_font("Arial", "B", 12)
     pdf.set_text_color(0)
     pdf.cell(0, 10, "2. Glue Joint Resistance", ln=True)
@@ -200,18 +201,11 @@ def generate_pdf_summary(
     pdf.cell(0, 10, "2.2 Solar Panel", ln=True)
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, f"Panel Size: {panelSize}", ln=True)
-    pdf.cell(0, 8, f"Panel Width: {width} mm", ln=True)
-    pdf.cell(0, 8, f"Panel Height: {height} mm", ln=True)
-    pdf.cell(0, 8, f"Panel Area: {round(area * 0.001**2, 2)} m²", ln=True)
+    pdf.cell(0, 8, f"Panel Dimensions: {width}/{height} mm", ln=True)
     pdf.cell(0, 8, f"Gluing Distance: {int(gluingDistance)} mm", ln=True)
 
-
     # image
-    pdf.insert_plot_image(panel_image_path, "Solar Panel Layout", 140, -40, 135)
-
-
-    # page break
-    pdf.add_page()
+    pdf.image(panel_image_path, w=140, x=85, y=50)
 
     # Gluing Design Table
     pdf.set_font("Arial", "B", 11)
@@ -221,6 +215,47 @@ def generate_pdf_summary(
     pdf.cell(0, 8, "This table shows the required glue width.", ln=True)
 
     # image
-    pdf.insert_plot_image(check_image_path, "Gluing Design Table", 150, 10, 70)
+    pdf.image(check_image_path, w=170, x=10, y=160)
+
+    # Quatities
+    pdf.cell(0, 8, "", ln=True)
+    pdf.cell(0, 8, "", ln=True)
+    pdf.cell(0, 8, "", ln=True)
+    pdf.cell(0, 8, "", ln=True)
+
+    pdf.set_font("Arial", "B", 12)
+    pdf.cell(0, 10, "2.4 Qantities", ln=True)
+    pdf.set_font("Arial", "", 11)
+    pdf.cell(0, 8, f"Total number of tubes: {int(numberTubes)}", ln=True)
+    pdf.cell(0, 8, f"Total number of tubes: {int(numberTubesFact)} (incl. 10%)", ln=True)
+    pdf.cell(0, 8, "Note: It is advised to consider a waste factor of 10%.", ln=True)
+
+
+    # page break
+    pdf.add_page()
+
+    # ----------------------------
+    # Page 3: SunMan Details
+    # ----------------------------
+
+    pdf.set_text_color(0)  # black
+    pdf.set_font("Arial", "B", 11)
+    pdf.cell(0, 8, "", ln=True)
+    pdf.cell(0, 8, "SunMan", ln=True)
+    pdf.set_font("Arial", "", 11)
+    pdf.multi_cell(0, 6, (
+    "Powered by heavyweight industry veterans, Sunman Energy (Sunman) is a technology company delivering "
+    "the future of solar. Through the research and development of proprietary composite materials, "
+    "Sunman has brought to market the world's first glass-free, ultra-light crystalline-slicon solar module "
+    "eArc. Replacing glass with lightweight polymer composites, Sunman and its revolutionary eArc modules "
+    "are taking 'PV Everywhere' and breathing life to applications that were previously impossible."
+    ))  
+
+    pdf.cell(0, 8, "", ln=True)
+    pdf.set_text_color(0, 0, 255)
+    pdf.cell(0, 10, "Visit SunMan Energy", ln=True, link="https://de.sunman-energy.com/")
+    
+    pdf.set_text_color(100)  # grey
+    pdf.cell(0, 8, "Copyright © 2015 - 2025 Sunman Energy", ln=True)
 
     return pdf.output(dest='S').encode('latin-1')

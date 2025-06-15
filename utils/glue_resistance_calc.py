@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
+from utils.utils import interpolate_value, draw_arrow, add_text
 
 def glue_resistance_section(wd, figBuilding):
     
@@ -51,6 +52,8 @@ def glue_resistance_section(wd, figBuilding):
 
         glueLength = numberGlueLines*width
 
+        numberGlueLines
+
         if panelSize == "SMF430":
             gluingDistance = (height - 100) / 4
             linesXCoords = [[gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx], [gapx, width + gapx]]
@@ -84,6 +87,25 @@ def glue_resistance_section(wd, figBuilding):
 
         for i in range(len(linesYCoords)):
             draw_line(figPanel, linesXCoords[i], linesYCoords[i], 12, "red", 1)
+
+        # dimension height
+        xList = [gapx - 50, gapx - 50]
+        yList = [gapy + 0, gapy + height]
+        draw_arrow(figPanel, xList, yList, "Y", 5, 5)
+        add_text(figPanel, height, gapx - 230 , gapy + height/2, 15)
+
+        # dimension glue distance
+        restDistance = (height - (numberGlueLines-1) * gluingDistance) / 2
+        xList = [gapx + width + 50, gapx + width + 50]
+        yList = [gapy + gluingDistance * 2 + restDistance, gapy + gluingDistance * 3 + restDistance]
+        draw_arrow(figPanel, xList, yList, "Y", 5, 5)
+        add_text(figPanel, int(gluingDistance), gapx + width + 100 , gapy + gluingDistance * 2.4 + restDistance, 15)
+
+        # dimension width
+        xList = [gapx + 0, gapx + width]
+        yList = [gapy - 50, gapy - 50]
+        draw_arrow(figPanel, xList, yList, "X", 5, 5)
+        add_text(figPanel, width, gapx + width/2 - 70, gapy - 100, 15)
 
         #____________________TEXT____________________
         # text sizes
