@@ -175,7 +175,7 @@ def glue_resistance_section(wd, figBuilding):
         check = ["✅" if x < 100 else "❌" for x in glueWidthUtil]
 
         colHeader = ["Wind Load [N/mm2]", "Glue Width [mm]"]
-        colExpl = ["w_d", "req. glue per panel"]
+        colExpl = ["w_d", "req. glue"]
 
         colF = [str(abs(wd[0])) , str(round(glueWidthReq[0]))]
         colG = [str(abs(wd[1])) , str(round(glueWidthReq[1]))]
