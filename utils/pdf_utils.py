@@ -96,7 +96,7 @@ def generate_pdf_summary(
     # Page 1: Wind Load Parameters
     # ----------------------------
     pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "1. Wind Load Parameters", ln=True)
+    pdf.cell(0, 10, "1. Wind Load Calculation", ln=True)
     
     # Base Velocity Pressure
     pdf.set_font("Arial", "B", 11)
@@ -208,7 +208,7 @@ def generate_pdf_summary(
     pdf.image(panel_image_path, w=140, x=85, y=50)
 
     # Gluing Design Table
-    pdf.set_font("Arial", "B", 11)
+    pdf.set_font("Arial", "B", 12)
     pdf.cell(0, 8, "", ln=True)
     pdf.cell(0, 8, "2.3 Gluing Design Table", ln=True)
     pdf.set_font("Arial", "", 11)
