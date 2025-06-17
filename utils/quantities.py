@@ -7,9 +7,10 @@ def quantities(numberGlueLines, width, glueWidthReq):
         st.write("")
         st.write("")
         st.write("")
-        col1, col2 = st.columns([3, 60])
+
+        col1, col2 = st.columns([1,22])
         with col1:
-            st.image("images/icon11.png", width=50)
+            st.image("images/icon11.png")
         with col2:
             st.header("Quantities")
 
