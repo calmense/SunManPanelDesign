@@ -206,7 +206,7 @@ def generate_pdf_summary(
     pdf.cell(0, 8, f"Gluing Distance: {int(gluingDistance)} mm", ln=True)
 
     # image
-    pdf.image(panel_image_path, w=140, x=85, y=55)
+    pdf.image(panel_image_path, w=140, x=85, y=50)
 
     # Gluing Design Table
     pdf.set_font("Arial", "B", 12)
@@ -216,7 +216,7 @@ def generate_pdf_summary(
     pdf.cell(0, 8, "This table shows the required glue width.", ln=True)
 
     # image
-    pdf.image(check_image_path, w=170, x=10, y=160)
+    pdf.image(check_image_path, w=170, x=10, y=165)
 
     # Quatities
     pdf.cell(0, 8, "", ln=True)
