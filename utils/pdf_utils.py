@@ -197,6 +197,7 @@ def generate_pdf_summary(
     
 
     # Solar Panel
+    pdf.cell(0, 8, "", ln=True)
     pdf.set_font("Arial", "B", 12)
     pdf.cell(0, 10, "2.2 Solar Panel", ln=True)
     pdf.set_font("Arial", "", 11)
@@ -205,7 +206,7 @@ def generate_pdf_summary(
     pdf.cell(0, 8, f"Gluing Distance: {int(gluingDistance)} mm", ln=True)
 
     # image
-    pdf.image(panel_image_path, w=140, x=85, y=50)
+    pdf.image(panel_image_path, w=140, x=85, y=55)
 
     # Gluing Design Table
     pdf.set_font("Arial", "B", 12)
