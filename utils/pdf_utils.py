@@ -222,9 +222,10 @@ def generate_pdf_summary(
     pdf.cell(0, 8, "", ln=True)
     pdf.cell(0, 8, "", ln=True)
     pdf.cell(0, 8, "", ln=True)
+    pdf.cell(0, 8, "", ln=True)
 
     pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "2.4 Qantities", ln=True)
+    pdf.cell(0, 10, "2.4 Quantities", ln=True)
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, f"Total number of tubes: {int(numberTubes)}", ln=True)
     pdf.cell(0, 8, f"Total number of tubes: {int(numberTubesFact)} (incl. 10%)", ln=True)
