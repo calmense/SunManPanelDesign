@@ -145,6 +145,7 @@ def generate_pdf_summary(
     pdf.set_text_color(100)  # grey
     pdf.cell(0, 8, "Wind Load EN 1991-4 Ch. 7.2.3 - External Pressure Coefficients", ln=True)
     pdf.set_font("Arial", "", 11)
+    pdf.set_text_color(0)  # black
     pdf.cell(0, 8, "The design wind load is determined for each roof area.", ln=True)
     pdf.image(table_image_path, w=170, x=10, y=195)
 
@@ -194,7 +195,6 @@ def generate_pdf_summary(
     pdf.cell(0, 8, f"Glue Manufacturer: {designGlueJointResistance}", ln=True)
     pdf.cell(0, 8, f"Design Glue Joint Resistance: {designGlueJointResistanceValue} N/mm²", ln=True)
     
-    pdf.ln(2)
 
     # Solar Panel
     pdf.set_font("Arial", "B", 12)
