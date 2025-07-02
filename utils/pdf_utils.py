@@ -58,7 +58,7 @@ def generate_pdf_summary(
     glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
     glueWidthReq, glueWidthFinal, 
     figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
-    logo_path="./images/Sunman_logo.png",
+    logo_path="./images/Sunman_logo.png", 
 ):
     pdf = SunmanPDF(logo_path=logo_path)
     pdf.add_page()
@@ -113,7 +113,6 @@ def generate_pdf_summary(
     pdf.ln(1)
     pdf.cell(0, 8, "", ln=True)
 
-
     # Gust Speed Pressure
     pdf.set_font("Arial", "I", 9)
     pdf.set_text_color(100)  # grey
@@ -130,7 +129,7 @@ def generate_pdf_summary(
     pdf.ln(1)
 
     # images
-    pdf.image("images/wind_zones_germany.png", w=70, x=115, y=65)
+    pdf.image("images/wind_zones_poland.png", w=70, x=115, y=65)
     pdf.image(building_image_path, w=90, x=105, y=120)
 
     # Design Wind Load
@@ -216,6 +215,7 @@ def generate_pdf_summary(
     pdf.image(check_image_path, w=170, x=10, y=165)
 
     # Quatities
+    pdf.cell(0, 8, "", ln=True)
     pdf.cell(0, 8, "", ln=True)
     pdf.cell(0, 8, "", ln=True)
     pdf.cell(0, 8, "", ln=True)
