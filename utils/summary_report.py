@@ -59,7 +59,7 @@ def summary_report_section(load_results, glue_results, quantities_results):
                 glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
                 glueWidthReq, glueWidthFinal, 
                 figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
-                logo_path="./images/Sunman_logo.png", imageCountry
+                logo_path="./images/Sunman_logo.png", country_path=imageCountry,
                 
             )
 
