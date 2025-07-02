@@ -188,7 +188,7 @@ def generate_pdf_summary(
     pdf.set_font("Arial", "B", 12)
     pdf.cell(0, 10, "2.1 Glue Joint Parameters", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.cell(0, 8, f"Glue Manufacturer: {designGlueJointResistanceValue}", ln=True)
+    pdf.cell(0, 8, f"Glue Manufacturer: {glueManufacturerSelected}", ln=True)
     pdf.cell(0, 8, f"Design Glue Joint Resistance: {designGlueJointResistanceValue} N/mm²", ln=True)
     
 
@@ -227,7 +227,8 @@ def generate_pdf_summary(
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, f"Total number of tubes: {int(numberTubes)}", ln=True)
     pdf.cell(0, 8, f"Total number of tubes: {int(numberTubesFact)} (incl. 10%)", ln=True)
-    pdf.cell(0, 8, "Note: It is advised to consider a waste factor of 10%.", ln=True)
+    pdf.cell(0, 8, "Note: It is advised to consider a waste factor of 10%. " \
+    "The gluing thickness is considered as t = 5 mm", ln=True)
 
 
     # page break
