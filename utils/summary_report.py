@@ -48,9 +48,7 @@ def summary_report_section(load_results, glue_results, quantities_results):
             glueWidthReq = glue_results["glueWidthReq"]
             glueWidthFinal = glue_results["glueWidthFinal"]
             gluingDistance = glue_results["gluingDistance"]
-
             figBuilding = load_results["figBuilding"]
-
 
             # 📄 PDF erzeugen
             pdf_bytes = generate_pdf_summary(
@@ -62,9 +60,8 @@ def summary_report_section(load_results, glue_results, quantities_results):
                 glueWidthReq, glueWidthFinal, 
                 figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
                 logo_path="./images/Sunman_logo.png",
+                
             )
-
-
 
             # ⬇️ Download-Button
             st.download_button(
