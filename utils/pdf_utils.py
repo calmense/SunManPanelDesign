@@ -50,14 +50,13 @@ class SunmanPDF(FPDF):
         pdf.set_font("Arial", "", 11)
 
 
-
 def generate_pdf_summary(
     country, windZone, fundBasicWindVelocity, baseVelocityPressure,
     terrainCategory, buildingHeight, gustSpeedPressure,
     buildingLength, buildingWidth,
     panelSize, width, height, area, gluingDistance,
-    designGlueJointResistance, designGlueJointResistanceValue,
-    glueWidthReq, glueWidthChos, glueWidthUtil, 
+    glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
+    glueWidthReq, glueWidthFinal, 
     figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
     panel_image_path=None,
     logo_path="images/Sunman_logo.png",
@@ -192,7 +191,7 @@ def generate_pdf_summary(
     pdf.set_font("Arial", "B", 12)
     pdf.cell(0, 10, "2.1 Glue Joint Parameters", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.cell(0, 8, f"Glue Manufacturer: {designGlueJointResistance}", ln=True)
+    pdf.cell(0, 8, f"Glue Manufacturer: {designGlueJointResistanceValue}", ln=True)
     pdf.cell(0, 8, f"Design Glue Joint Resistance: {designGlueJointResistanceValue} N/mm²", ln=True)
     
 

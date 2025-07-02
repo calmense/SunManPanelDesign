@@ -28,10 +28,11 @@ def load_calculation_section(countries, windZones, imagesCountry,
     st.write("")
 
     with st.expander("Expand"):
-        st.subheader("**Base Velocity Pressure**")
+        st.markdown("#### **Base Velocity Pressure**")
         st.write('Chose the country and the wind zone of your project site.')
-        st.write("**Fundamental Basic Wind Velocity** represents the speed of wind at a standard height above ground level, unaffected by local topography or obstacles.")
-        st.write("**Base Velocity Pressure** represents the base wind force, determined by the project's location and local exposure category.")
+        st.markdown("""
+        The **Fundamental Basic Wind Velocity** represents the speed of wind at a standard height above ground level, unaffected by local topography or obstacles. The **Base Velocity Pressure** represents the base wind force, determined by the project's location and local exposure category.
+        """)
         st.latex("")
         st.latex("")
 
@@ -70,7 +71,7 @@ def load_calculation_section(countries, windZones, imagesCountry,
         st.write("")
         st.write("")
 
-        st.subheader("Gust Speed Pressure")
+        st.markdown("#### Gust Speed Pressure")
         st.write('The gust speed pressure is determined based on the terrain category and the building height.')
         st.write("The **Terrain Category** describes the surface roughness of the surrounding area 500m from the housing site.")
         st.write("**Gust Speed Pressure** refers to the dynamic pressure exerted on structures by the maximum instantaneous wind speed.")
@@ -116,7 +117,7 @@ def load_calculation_section(countries, windZones, imagesCountry,
         st.write("")
 
 
-        st.subheader("Additional Factor")
+        st.markdown("#### Additional Factor")
         st.write("For designing the adhesives, a partial safety factor **γ = 1.5** for wind is applied according to Eurocode EN 1990-1-1.")
 
         col1, col2, col3, col4 = st.columns(4)
@@ -138,7 +139,7 @@ def load_calculation_section(countries, windZones, imagesCountry,
         st.write("")
 
 
-        st.subheader("Geometry")
+        st.markdown("#### Geometry")
         st.write('Due to the varying wind suction forces acting on the sealing surfaces, a flat roof is divided into the following areas.')
         st.caption("Wind Load – EN 1991-4 Ch. 7.2.3 – External Pressure Coefficients")
 
@@ -151,8 +152,8 @@ def load_calculation_section(countries, windZones, imagesCountry,
             buildingWidth = int(st.text_input('Building Width [m]', 20))
 
 
-        gapx = 10
-        gapy = 10
+        gapx = 20
+        gapy = 20
 
         figBuilding = go.Figure(go.Scatter(x=[gapx + 0,gapx + buildingLength, gapx + buildingLength,gapx + 0, gapx + 0], 
                                 y=[0 + gapy,0 + gapy, buildingWidth + gapy, buildingWidth + gapy, 0 + gapy], 
@@ -194,60 +195,61 @@ def load_calculation_section(countries, windZones, imagesCountry,
         factor = 7
 
         # dimension width
-        xList = [gapx - 6 * scaleX, gapx - 6 * scaleX]
+        xList = [gapx-10*scaleX, gapx-10*scaleX]
         yList = [gapy, gapy+buildingWidth]
         draw_arrow(figBuilding, xList, yList, "Y", scaleX/factor, scaleY/factor)
 
         xList = [gapx, gapx+buildingLength]
-        yList = [gapy+buildingWidth + 6 * scaleY, gapy + buildingWidth + 6 * scaleY]
+        yList = [gapy+buildingWidth+10*scaleY, gapy+buildingWidth+10*scaleY]
         draw_arrow(figBuilding, xList, yList, "X", scaleX/factor, scaleY/factor)
 
-        xList = [gapx - 3.5 * scaleX, gapx - 3.5 * scaleX]
+        xList = [gapx-5*scaleX, gapx-5*scaleX]
         yList = [gapy+buildingWidth-e_4_2, gapy+buildingWidth]
         draw_arrow(figBuilding, xList, yList, "Y", scaleX/factor, scaleY/factor)
 
         xList = [gapx, gapx+e_4_1]
-        yList = [gapy+buildingWidth + 3.5 * scaleY, gapy+buildingWidth + 3.5 * scaleY]
+        yList = [gapy+buildingWidth+5*scaleY, gapy+buildingWidth+5*scaleY]
         draw_arrow(figBuilding, xList, yList, "X", scaleX/factor, scaleY/factor)
 
         xList = [gapx, gapx+e_10_2]
-        yList = [gapy-3*scaleY, gapy-3*scaleY]
+        yList = [gapy-5*scaleY, gapy-5*scaleY]
         draw_arrow(figBuilding, xList, yList, "X", scaleX/factor, scaleY/factor)
 
-        xList = [gapx-3*scaleX, gapx-3*scaleX]
+        xList = [gapx-5*scaleX, gapx-5*scaleX]
         yList = [gapy, gapy+e_10_1]
         draw_arrow(figBuilding, xList, yList, "Y", scaleX/factor, scaleY/factor)
 
         # text
-        x = gapx - 8 * scaleX
+        x = gapx-10*scaleX
         y = gapy+buildingWidth/2
         add_text(figBuilding, buildingWidth, x , y, 15)
 
         x = gapx+buildingLength/2
-        y = gapy+buildingWidth + 7 * scaleY
+        y = gapy+buildingWidth+9*scaleY
         add_text(figBuilding, buildingLength, x , y, 15)
 
-        x = gapx - 3 * scaleX
+        x = gapx-4*scaleX
         y = gapy+e_10_1/2
         add_text(figBuilding, e_10_1, x , y, 15)
 
-        x = gapx - 3 * scaleX
+        x = gapx-4*scaleX
         y = gapy+buildingWidth-e_4_2/2
         add_text(figBuilding, e_4_2, x , y, 15)
 
         x = gapx+e_10_2+1*scaleX
-        y = gapy-3*scaleY
+        y = gapy-5*scaleY
         add_text(figBuilding, e_10_2, x , y, 15)
 
         x = gapx+e_4_1+1*scaleX
-        y = gapy+buildingWidth+3*scaleY
+        y = gapy+buildingWidth+5*scaleY
         add_text(figBuilding, e_4_1, x , y, 15)
 
-        x = gapx+buildingLength/2-scaleX
+
+        x = gapx+buildingLength/2-2*scaleX
         y = gapy+e_10_1/2
         add_text(figBuilding, "Area G", x , y, 15)
 
-        x = gapx+buildingLength/2-scaleX
+        x = gapx+buildingLength/2-2*scaleX
         y = gapy+buildingWidth/2
         add_text(figBuilding, "Area H", x , y, 15)
 
@@ -275,7 +277,7 @@ def load_calculation_section(countries, windZones, imagesCountry,
         # st.write(figBuilding)
         st.plotly_chart(figBuilding, key="fig_building_main1")
 
-        st.subheader("Design Wind Load")
+        st.markdown("#### Design Wind Load")
         st.write('The design wind load is determined for each roof area.')
         st.caption("DIN EN 1991-1-4 Chapter 7.2.3 ")
 
