@@ -324,7 +324,6 @@ def load_calculation_section(countries, windZones, imagesCountry,
 
         st.plotly_chart(figTable)
 
-
         # Return all needed values
         return {
             "country": country,

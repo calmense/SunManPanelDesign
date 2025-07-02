@@ -35,7 +35,7 @@ def summary_report_section(load_results, glue_results, quantities_results):
             gustSpeedPressure = load_results["gustSpeedPressure"]
             buildingLength = load_results["buildingLength"]
             buildingWidth = load_results["buildingWidth"]
-            image_Country = load_results["imageCountry"]
+            imageCountry = load_results["imageCountry"]
 
             panelSize = glue_results["panelSize"]
             width = glue_results["width"]
@@ -59,7 +59,7 @@ def summary_report_section(load_results, glue_results, quantities_results):
                 glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
                 glueWidthReq, glueWidthFinal, 
                 figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
-                logo_path="./images/Sunman_logo.png",
+                logo_path="./images/Sunman_logo.png", imageCountry
                 
             )
 

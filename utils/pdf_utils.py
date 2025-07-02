@@ -58,7 +58,7 @@ def generate_pdf_summary(
     glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
     glueWidthReq, glueWidthFinal, 
     figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
-    logo_path="./images/Sunman_logo.png", 
+    logo_path="./images/Sunman_logo.png", imageCountry
 ):
     pdf = SunmanPDF(logo_path=logo_path)
     pdf.add_page()
@@ -129,7 +129,7 @@ def generate_pdf_summary(
     pdf.ln(1)
 
     # images
-    pdf.image("images/wind_zones_poland.png", w=70, x=115, y=65)
+    pdf.image(imageCountry, w=70, x=115, y=65)
     pdf.image(building_image_path, w=90, x=105, y=120)
 
     # Design Wind Load
