@@ -11,7 +11,7 @@ def summary_report_section(load_results, glue_results, quantities_results):
 
     numberTubes = quantities_results["numberTubes"]
     numberTubesFact = quantities_results["numberTubesFact"]
-
+    
     st.write("")
     st.write("")
     st.write("")
@@ -41,12 +41,13 @@ def summary_report_section(load_results, glue_results, quantities_results):
             width = glue_results["width"]
             height = glue_results["height"]
             area = glue_results["area"]
-            gluingDistance = glue_results["gluingDistance"]
-            designGlueJointResistance = glue_results["designGlueJointResistance"]
+            glueManufacturerSelected = glue_results["glueManufacturerSelected"]
+            glueSelected = glue_results["glueSelected"]
+            glueValue = glue_results["glueValue"]
             designGlueJointResistanceValue = glue_results["designGlueJointResistanceValue"]
             glueWidthReq = glue_results["glueWidthReq"]
-            glueWidthChos = glue_results["glueWidthChos"]
-            glueWidthUtil = glue_results["glueWidthUtil"]
+            glueWidthFinal = glue_results["glueWidthFinal"]
+            gluingDistance = glue_results["gluingDistance"]
 
             figBuilding = load_results["figBuilding"]
 
@@ -56,11 +57,12 @@ def summary_report_section(load_results, glue_results, quantities_results):
                 terrainCategory, buildingHeight, gustSpeedPressure,
                 buildingLength, buildingWidth,
                 panelSize, width, height, area, gluingDistance,
-                designGlueJointResistance, designGlueJointResistanceValue,
-                glueWidthReq, glueWidthChos, glueWidthUtil, 
+                glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
+                glueWidthReq, glueWidthFinal, 
                 figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
+                panel_image_path=None,
                 logo_path="images/Sunman_logo.png",
-                country_path=imageCountry
+                country_path="images/Country_image.png"
             )
 
             # ⬇️ Download-Button

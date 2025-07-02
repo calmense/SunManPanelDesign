@@ -1,9 +1,14 @@
 import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
-from utils.utils import interpolate_value, draw_arrow, add_text
 
 def glue_resistance_section(wd, figBuilding):
+
+
+    glueManufacturer = ["Dow", "Sika", "Scott Bader", "Soudal", "Innotec"]
+    glueAdhesive = ["Dowsil 895", "Sika SG-20", "Crestabond M7-15", "Soudalbond 677", ["Versabond", "Membrane Adhesive", "Adheseal"]]
+    glueAdhesiveValue = [0.14, 0.17, 21.54, 3.8, [0.4, 1.4, 2.6]]
+    minWidthValues = [6, 5, 10, 30, 10]
     
     st.write("")
     st.write("")
@@ -20,20 +25,62 @@ def glue_resistance_section(wd, figBuilding):
 
     with st.expander("Expand"):
 
-        st.subheader("Input Parameters")
-        st.markdown('<h3 class="subsubheader">Chose between two panel sizes and chose a design glue joint resistance.</h3>', unsafe_allow_html=True)
+        st.markdown("#### Input Parameters")
+        st.write('Chose between two panel sizes and chose a design glue joint resistance.')
 
         col1, col2, col3, col4 = st.columns(4)
+
         with col1:
             panelSize = st.selectbox('Panel Size', ["SMF430", "SMF520"])
+
         with col2:
-            designGlueJointResistance = st.selectbox('Glue Manufacturer', ["Dowsil 895", "Sika SG-20"])
+            glueManufacturerSelected = st.selectbox('Glue Manufacturer', glueManufacturer)
+            indexManufacturer = glueManufacturer.index(glueManufacturerSelected)
+            minWidth = minWidthValues[indexManufacturer]
+
+        with col3:
+            glueSelected = st.selectbox('Glue Adhesive', glueAdhesive[indexManufacturer])
+
+
+        # Dynamisch je nach Struktur (Liste oder Einzelwert)
+        if glueManufacturerSelected == "Innotec":
+            indexManufacturer = ["Versabond", "Membrane Adhesive", "Adheseal"].index(glueSelected)
+            glueValue = [0.4, 1.4, 2.6][indexManufacturer]
+            
+        else:
+            indexManufacturer = glueManufacturer.index(glueManufacturerSelected)
+            glueValue = glueAdhesiveValue[indexManufacturer]
 
         st.write("")
-        st.markdown('Both glues are ETAG approved, so the design strength R<sub>d</sub> is specified in the datasheet, eliminating the need for further reduction factors.', unsafe_allow_html=True)
-        
-        designGlueJointResistanceValue = 0.14 if designGlueJointResistance == "Dowsil 895" else 0.17
-                                                  
+        designGlueJointResistanceValue = round(glueValue / (1.3 * 1.6 * 1.0),2)
+
+        if glueManufacturerSelected in ["Dow", "Sika"]:
+            if glueSelected == "Dowsil 895":
+                designGlueJointResistanceValue = 0.14
+            elif glueSelected == "Sika SG-20":
+                designGlueJointResistanceValue = 0.17
+
+            st.markdown(
+                '<b>Note:</b> The adhesive is <b>ETAG-approved</b>, so the design strength '
+                'R<sub>d</sub> is provided in the datasheet, and no additional reduction factors are required.',
+                unsafe_allow_html=True
+            )
+            st.markdown(f'Design Strength R<sub>d</sub> = {designGlueJointResistanceValue} N/mm²', unsafe_allow_html=True)
+
+        else:
+            st.markdown(
+                '<b>Note:</b> The adhesive is <b>not ETAG-approved</b>, so the characteristic strength '
+                'R<sub>k</sub> must be multiplied by appropriate reduction factors to determine R<sub>d</sub>.',
+                unsafe_allow_html=True
+            )
+            st.markdown(f'Characteristic Strength: <b>R<sub>k</sub> = {glueValue} N/mm²</b>', unsafe_allow_html=True)
+
+            st.markdown(
+                f'Design Strength: <b>R<sub>d</sub> = R<sub>k</sub> / (γ<sub>M</sub> · K<sub>A</sub> · K<sub>𝜃</sub>) '
+                f'= R<sub>k</sub> / 2.08 = {designGlueJointResistanceValue} N/mm²</b>',
+                unsafe_allow_html=True
+            )
+                                                        
         gapx = 0
         gapy = 0
 
@@ -51,8 +98,6 @@ def glue_resistance_section(wd, figBuilding):
             area = width * height
 
         glueLength = numberGlueLines*width
-
-        numberGlueLines
 
         if panelSize == "SMF430":
             gluingDistance = (height - 100) / 4
@@ -88,25 +133,6 @@ def glue_resistance_section(wd, figBuilding):
         for i in range(len(linesYCoords)):
             draw_line(figPanel, linesXCoords[i], linesYCoords[i], 12, "red", 1)
 
-        # dimension height
-        xList = [gapx - 50, gapx - 50]
-        yList = [gapy + 0, gapy + height]
-        draw_arrow(figPanel, xList, yList, "Y", 5, 5)
-        add_text(figPanel, height, gapx - 230 , gapy + height/2, 15)
-
-        # dimension glue distance
-        restDistance = (height - (numberGlueLines-1) * gluingDistance) / 2
-        xList = [gapx + width + 50, gapx + width + 50]
-        yList = [gapy + gluingDistance * 2 + restDistance, gapy + gluingDistance * 3 + restDistance]
-        draw_arrow(figPanel, xList, yList, "Y", 5, 5)
-        add_text(figPanel, int(gluingDistance), gapx + width + 100 , gapy + gluingDistance * 2.4 + restDistance, 15)
-
-        # dimension width
-        xList = [gapx + 0, gapx + width]
-        yList = [gapy - 50, gapy - 50]
-        draw_arrow(figPanel, xList, yList, "X", 5, 5)
-        add_text(figPanel, width, gapx + width/2 - 70, gapy - 100, 15)
-
         #____________________TEXT____________________
         # text sizes
         titleSize = + 20
@@ -130,7 +156,7 @@ def glue_resistance_section(wd, figBuilding):
         col1, col2 = st.columns(2)
         with col1:
             st.write("")
-            st.subheader("SunMan Solar Panel")
+            st.markdown("#### SunMan Solar Panel")
             st.write(figPanel)
 
         with col2:
@@ -147,23 +173,25 @@ def glue_resistance_section(wd, figBuilding):
             st.write("")
             st.write("")
 
-            st.subheader("Solar Panel")
-            st.latex(r"\text{Width }" + ' B = ' + str(width) + ' mm')
-            st.latex(r"\text{Length }" + ' L = ' + str(height) + ' mm')
-            st.latex(r"\text{Area }" + ' A = ' + str(round(area * 0.001**2,1)) + ' m^2')
-            st.latex(r"\text{Gluing Distance }" + ' a = ' + str(int(gluingDistance)) + ' mm')
-            st.latex(r"\text{Design Glue Joint Resistance }" + ' R_d = ' + str(designGlueJointResistanceValue) + ' N/mm^2')
+            st.markdown("#### Solar Panel")
+            st.markdown(f'Width: <b>B = {width} mm</b>', unsafe_allow_html=True)
+            st.markdown(f'Length: <b>L = {height} mm</b>', unsafe_allow_html=True)
+            st.markdown(f'Area: <b>A = {round(area * 0.001**2, 1)} m²</b>', unsafe_allow_html=True)
+            st.markdown(f'Gluing Distance: <b>a = {int(gluingDistance)} mm</b>', unsafe_allow_html=True)
+            st.markdown(f'Design Glue Joint Resistance: <b>R<sub>d</sub> = {round(designGlueJointResistanceValue, 2)} N/mm²</b>', unsafe_allow_html=True)
             st.write("")
             st.write("")
             
-        st.subheader("Gluing Design Table")
-        st.markdown('<h3 class="subsubheader">This table shows the required glue width.</h3>', unsafe_allow_html=True)
+        st.markdown("#### Gluing Design Table")
+        st.write('This table shows the required glue width.')
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             utilTarget = 0.9
-            st.latex(r"\text{Utilization Target} = " + str(int(utilTarget*100)) + r"\, \%")
-            st.latex(r"\text{Gluing Width }" + 'b = ' + str(10) + ' mm')
+            
+            st.markdown(f'Utilization Target: <b>{int(utilTarget * 100)}&#8239;%</b>', unsafe_allow_html=True)
+            st.markdown(f'Min. Gluing Width: <b>b = {minWidth} mm</b>', unsafe_allow_html=True)
+
 
         # Define the headers and the cells of the table
         headers = ['F', 'G', 'H']
@@ -171,15 +199,17 @@ def glue_resistance_section(wd, figBuilding):
         # Calculate wk and wd based on coefficients
         glueWidthReq = [round( abs(wdi) * (gluingDistance / 1000)/ (designGlueJointResistanceValue / utilTarget), 0) for wdi in wd]
         glueWidthChos = [round( x+5, -1) for x in glueWidthReq]
+        glueWidthFinal = [str(max(glueWidthReq[x], minWidth)) for x in range(len(glueWidthReq))]   
+
         glueWidthUtil = [int( 100 *glueWidthReq[i] * utilTarget / (glueWidthChos[i])) for i in range(len(glueWidthChos))]
         check = ["✅" if x < 100 else "❌" for x in glueWidthUtil]
 
-        colHeader = ["Wind Load [N/mm2]", "Glue Width [mm]"]
-        colExpl = ["w_d", "req. glue"]
+        colHeader = ["Wind Load [N/mm2]", "Glue Width Req. [mm]", "Glue Width [mm]"]
+        colExpl = ["w_d", "req. glue per panel", "final glue per panel"]
 
-        colF = [str(abs(wd[0])) , str(round(glueWidthReq[0]))]
-        colG = [str(abs(wd[1])) , str(round(glueWidthReq[1]))]
-        colH = [str(abs(wd[2])) , str(round(glueWidthReq[2]))]
+        colF = [str(abs(wd[0])) , str(round(glueWidthReq[0])), str(glueWidthFinal[0])]
+        colG = [str(abs(wd[1])) , str(round(glueWidthReq[1])), str(glueWidthFinal[1])]
+        colH = [str(abs(wd[2])) , str(round(glueWidthReq[2])), str(glueWidthFinal[2])]
 
 
         # Create the table
@@ -213,13 +243,14 @@ def glue_resistance_section(wd, figBuilding):
             "height": height,
             "area": area,
             "gluingDistance": gluingDistance,
-            "designGlueJointResistance": designGlueJointResistance,
-            "designGlueJointResistanceValue": designGlueJointResistanceValue,
             "figPanel": figPanel,
             "figCheck": figCheck,
+            "glueManufacturerSelected": glueManufacturerSelected,
+            "glueSelected": glueSelected,
+            "glueValue": glueValue,
+            "designGlueJointResistanceValue": designGlueJointResistanceValue,
             "glueWidthReq": glueWidthReq,
-            "glueWidthChos": glueWidthChos,
-            "glueWidthUtil": glueWidthUtil,
+            "glueWidthFinal": glueWidthFinal,
             "numberGlueLines": numberGlueLines,
             "glueLength": glueLength
         }
