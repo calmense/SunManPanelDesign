@@ -188,7 +188,7 @@ def generate_pdf_summary(
     pdf.set_font("Arial", "B", 12)
     pdf.cell(0, 10, "2.1 Glue Joint Parameters", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.cell(0, 8, f"Glue Manufacturer: {glueManufacturerSelected}", ln=True)
+    pdf.cell(0, 8, f"Glue Manufacturer: {glueManufacturerSelected} - {glueSelected}", ln=True)
     pdf.cell(0, 8, f"Design Glue Joint Resistance: {designGlueJointResistanceValue} N/mm²", ln=True)
     
 
