@@ -35,7 +35,7 @@ def summary_report_section(load_results, glue_results, quantities_results):
             gustSpeedPressure = load_results["gustSpeedPressure"]
             buildingLength = load_results["buildingLength"]
             buildingWidth = load_results["buildingWidth"]
-            imageCountry = load_results["imageCountry"]
+            image_Country = load_results["imageCountry"]
 
             panelSize = glue_results["panelSize"]
             width = glue_results["width"]
@@ -51,6 +51,7 @@ def summary_report_section(load_results, glue_results, quantities_results):
 
             figBuilding = load_results["figBuilding"]
 
+
             # 📄 PDF erzeugen
             pdf_bytes = generate_pdf_summary(
                 country, windZone, fundBasicWindVelocity, baseVelocityPressure,
@@ -60,10 +61,10 @@ def summary_report_section(load_results, glue_results, quantities_results):
                 glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
                 glueWidthReq, glueWidthFinal, 
                 figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
-                panel_image_path=None,
-                logo_path="images/Sunman_logo.png",
-                country_path="images/Country_image.png"
+                logo_path="./images/Sunman_logo.png",
             )
+
+
 
             # ⬇️ Download-Button
             st.download_button(
