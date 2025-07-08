@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
 
-def quantities(numberGlueLines, width, glueWidthFinal):
+def quantities(glueLength, width, glueWidthFinal):
     
         st.write("")
         st.write("")
@@ -16,7 +16,6 @@ def quantities(numberGlueLines, width, glueWidthFinal):
         st.write('Chose how many panels you have in each roof area.')
 
         with st.expander("Expand"):
-            glueLength = numberGlueLines*width
 
             st.markdown("#### Input")
             st.markdown('The gluing thickness is considered as <b>t = 5 mm</b>', unsafe_allow_html=True)
