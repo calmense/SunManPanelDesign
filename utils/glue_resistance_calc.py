@@ -9,6 +9,7 @@ def glue_resistance_section(wd, figBuilding):
     glueAdhesive = ["Dowsil 895", "Sika SG-20", "Crestabond M7-15", "Soudalbond 677", ["Versabond", "Membrane Adhesive", "Adheseal"]]
     glueAdhesiveValue = [0.14, 0.17, 21.54, 3.8, [0.4, 1.4, 2.6]]
     minWidthValues = [6, 5, 10, 30, 10]
+    minThicknessValues = [3, 3, 1, 3, 3, 3, 3]
     
     st.write("")
     st.write("")
@@ -37,9 +38,10 @@ def glue_resistance_section(wd, figBuilding):
             glueManufacturerSelected = st.selectbox('Glue Manufacturer', glueManufacturer)
             indexManufacturer = glueManufacturer.index(glueManufacturerSelected)
             minWidth = minWidthValues[indexManufacturer]
+            minThickness = minThicknessValues[indexManufacturer]
 
         with col3:
-            glueSelected = st.selectbox('Glue Adhesive', glueAdhesive[indexManufacturer])
+            glueSelected = st.selectbox('Adhesives', glueAdhesive[indexManufacturer])
 
 
         # Dynamisch je nach Struktur (Liste oder Einzelwert)
@@ -65,7 +67,7 @@ def glue_resistance_section(wd, figBuilding):
                 'R<sub>d</sub> is provided in the datasheet, and no additional reduction factors are required.',
                 unsafe_allow_html=True
             )
-            st.markdown(f'Design Strength R<sub>d</sub> = {designGlueJointResistanceValue} N/mm²', unsafe_allow_html=True)
+            st.markdown(f'Design Strength <b> R<sub>d</sub> = {designGlueJointResistanceValue} N/mm²', unsafe_allow_html=True)
 
         else:
             st.markdown(
@@ -187,22 +189,16 @@ def glue_resistance_section(wd, figBuilding):
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            utilTarget = 0.9
             
-            st.markdown(f'Utilization Target: <b>{int(utilTarget * 100)}&#8239;%</b>', unsafe_allow_html=True)
             st.markdown(f'Min. Gluing Width: <b>b = {minWidth} mm</b>', unsafe_allow_html=True)
-
+            st.markdown(f'Min. Gluing Thickness: <b>t = {minThickness} mm</b>', unsafe_allow_html=True)
 
         # Define the headers and the cells of the table
         headers = ['F', 'G', 'H']
 
         # Calculate wk and wd based on coefficients
-        glueWidthReq = [round( abs(wdi) * (gluingDistance / 1000)/ (designGlueJointResistanceValue / utilTarget), 0) for wdi in wd]
-        glueWidthChos = [round( x+5, -1) for x in glueWidthReq]
+        glueWidthReq = [round( abs(wdi) * (gluingDistance / 1000)/ (designGlueJointResistanceValue), 0) for wdi in wd]
         glueWidthFinal = [int(max(glueWidthReq[x], minWidth)) for x in range(len(glueWidthReq))]   
-
-        glueWidthUtil = [int( 100 *glueWidthReq[i] * utilTarget / (glueWidthChos[i])) for i in range(len(glueWidthChos))]
-        check = ["✅" if x < 100 else "❌" for x in glueWidthUtil]
 
         colHeader = ["Wind Load [N/mm2]", "Glue Width [mm]", "Glue Width [mm]"]
         colExpl = ["design", "required", "final"]
@@ -210,7 +206,6 @@ def glue_resistance_section(wd, figBuilding):
         colF = [str(abs(wd[0])) , str(round(glueWidthReq[0])), str(glueWidthFinal[0])]
         colG = [str(abs(wd[1])) , str(round(glueWidthReq[1])), str(glueWidthFinal[1])]
         colH = [str(abs(wd[2])) , str(round(glueWidthReq[2])), str(glueWidthFinal[2])]
-
 
         # Create the table
         figCheck = go.Figure(data=[go.Table(
@@ -252,5 +247,6 @@ def glue_resistance_section(wd, figBuilding):
             "glueWidthReq": glueWidthReq,
             "glueWidthFinal": glueWidthFinal,
             "numberGlueLines": numberGlueLines,
-            "glueLength": glueLength
+            "glueLength": glueLength,
+            "minThickness": minThickness,
         }

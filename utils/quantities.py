@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
 
-def quantities(numberGlueLines, width, glueWidthFinal):
+def quantities(glueLength, width, glueWidthFinal, minThickness):
     
         st.write("")
         st.write("")
@@ -16,10 +16,9 @@ def quantities(numberGlueLines, width, glueWidthFinal):
         st.write('Chose how many panels you have in each roof area.')
 
         with st.expander("Expand"):
-            glueLength = numberGlueLines*width
 
             st.markdown("#### Input")
-            st.markdown('The gluing thickness is considered as <b>t = 5 mm</b>', unsafe_allow_html=True)
+            st.markdown('The gluing thickness is considered as <b>t = '+ str(minThickness) +' mm</b>', unsafe_allow_html=True)
             st.markdown('One panel has a gluing length of <b>L = ' + str(glueLength/1000) + ' m</b>.', unsafe_allow_html=True)
             st.markdown('The gluing tube contains <b>600 ml </b>glue.', unsafe_allow_html=True)
 
@@ -40,10 +39,10 @@ def quantities(numberGlueLines, width, glueWidthFinal):
                 noAreaH = st.number_input('Area H', min_value=0, step=1, format="%i", value=1)
                 st.write("")
                 n = 0
-                st.write("Width per gluing line: <br> <b> w = " + str(glueWidthFinal[n])+ ' mm</b>', unsafe_allow_html=True)
+                st.write("Width per gluing line: <br> <b> w = " + str(float(glueWidthFinal[n]))+ ' mm</b>', unsafe_allow_html=True)
                 sausagesAreaH = float(glueWidthFinal[n]) * glueLength/1000**2
                 st.write("Glue area per panel: <br> <b> A = " + str(sausagesAreaH)+ ' m<sup>2</sup></b>', unsafe_allow_html=True)
-                sausagesVolumeH = round(sausagesAreaH * 0.005, 4)
+                sausagesVolumeH = round(sausagesAreaH * minThickness/1000, 4)
                 st.write("Glue volume per panel: <br> <b> V = " + str(sausagesVolumeH)+ ' m<sup>3</sup></b>', unsafe_allow_html=True)
                 sausagesVolumeHtot = round(sausagesVolumeH * noAreaH, 4)
                 st.write("Glue volume per roof area: <br> <b> V = " + str(sausagesVolumeHtot)+ ' m<sup>3</sup></b>', unsafe_allow_html=True)
@@ -55,7 +54,7 @@ def quantities(numberGlueLines, width, glueWidthFinal):
                 st.write("Width per gluing line: <br> <b> w = " + str(float(glueWidthFinal[n]))+ ' mm</b>', unsafe_allow_html=True)
                 sausagesAreaF = float(glueWidthFinal[n]) * glueLength/1000**2
                 st.write("Glue area per panel: <br> <b> A = " + str(sausagesAreaF)+ ' m<sup>2</sup></b>', unsafe_allow_html=True)
-                sausagesVolumeF = round(sausagesAreaF * 0.005, 4)
+                sausagesVolumeF = round(sausagesAreaF * minThickness/1000, 4)
                 st.write("Glue volume per panel: <br> <b> V = " + str(sausagesVolumeF)+ ' m<sup>3</sup></b>', unsafe_allow_html=True)
                 sausagesVolumeFtot = round(sausagesVolumeF * noAreaF, 4)
                 st.write("Glue volume per roof area: <br> <b> V = " + str(sausagesVolumeFtot)+ ' m<sup>3</sup></b>', unsafe_allow_html=True)
@@ -67,7 +66,7 @@ def quantities(numberGlueLines, width, glueWidthFinal):
                 st.write("Width per gluing line: <br> <b> w = " + str(float(glueWidthFinal[n]))+ ' mm</b>', unsafe_allow_html=True)
                 sausagesAreaG = float(glueWidthFinal[n]) * glueLength/1000**2
                 st.write("Glue area per panel: <br> <b> A = " + str(sausagesAreaG)+ ' m<sup>2</sup></b>', unsafe_allow_html=True)
-                sausagesVolumeG = round(sausagesAreaG * 0.005, 4)
+                sausagesVolumeG = round(sausagesAreaG * minThickness/1000, 4)
                 st.write("Glue volume per panel: <br> <b> V = " + str(sausagesVolumeG)+ ' m<sup>3</sup></b>', unsafe_allow_html=True)
                 sausagesVolumeGtot = round(sausagesVolumeG * noAreaG, 4)
                 st.write("Glue volume per roof area: <br> <b> V = " + str(sausagesVolumeGtot)+ ' m<sup>3</sup></b>', unsafe_allow_html=True)

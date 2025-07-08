@@ -189,6 +189,7 @@ def generate_pdf_summary(
     pdf.cell(0, 10, "2.1 Glue Joint Parameters", ln=True)
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, f"Glue Manufacturer: {glueManufacturerSelected}", ln=True)
+    pdf.cell(0, 8, f"Adhesive: {glueSelected}", ln=True)
     pdf.cell(0, 8, f"Design Glue Joint Resistance: {designGlueJointResistanceValue} N/mm²", ln=True)
     
 
@@ -212,7 +213,7 @@ def generate_pdf_summary(
     pdf.cell(0, 8, "This table shows the required glue width.", ln=True)
 
     # image
-    pdf.image(check_image_path, w=170, x=10, y=165)
+    pdf.image(check_image_path, w=170, x=10, y=175)
 
     # Quatities
     pdf.cell(0, 8, "", ln=True)
