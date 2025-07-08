@@ -247,5 +247,6 @@ def glue_resistance_section(wd, figBuilding):
             "glueWidthReq": glueWidthReq,
             "glueWidthFinal": glueWidthFinal,
             "numberGlueLines": numberGlueLines,
-            "glueLength": glueLength
+            "glueLength": glueLength,
+            "minThickness": minThickness,
         }
