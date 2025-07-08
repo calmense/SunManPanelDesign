@@ -2,6 +2,8 @@ import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
 
+from utils.utils import add_text, draw_arrow
+
 def glue_resistance_section(wd, figBuilding):
 
 
@@ -150,6 +152,26 @@ def glue_resistance_section(wd, figBuilding):
             paper_bgcolor='white', 
             plot_bgcolor='white', 
             showlegend=False)
+        
+        factor = 8
+        
+        # dimension width
+        xList = [-100, -100]
+        yList = [0, 0+height]
+        draw_arrow(figPanel, xList, yList, "Y", factor, factor)
+        add_text(figPanel, height, -300 , height/2, 15)
+
+        # dimension height
+        xList = [0, 0+width]
+        yList = [-100, -100]
+        draw_arrow(figPanel, xList, yList, "X", factor, factor)
+        add_text(figPanel, width, width/2 -100 , -200, 15)
+
+        # gluing distance
+        xList = [width + 100, width + 100]
+        yList = [50, 50 + gluingDistance]
+        draw_arrow(figPanel, xList, yList, "Y", factor, factor)
+        add_text(figPanel, int(gluingDistance), width + 150 , 50+gluingDistance/2, 15)
 
         # Hide the axis
         figPanel.update_xaxes(showline=False, showgrid=False, zeroline=False)
