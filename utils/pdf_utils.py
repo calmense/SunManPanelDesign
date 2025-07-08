@@ -56,7 +56,7 @@ def generate_pdf_summary(
     buildingLength, buildingWidth,
     panelSize, width, height, area, gluingDistance,
     glueManufacturerSelected, glueSelected, glueValue, designGlueJointResistanceValue,
-    glueWidthReq, glueWidthFinal, 
+    glueWidthReq, glueWidthFinal, minThickness,
     figBuilding, figTable, figPanel, figCheck, numberTubes, numberTubesFact,
     logo_path="./images/Sunman_logo.png", country_path="images/wind_zones_germany.png"
 ):
@@ -188,11 +188,10 @@ def generate_pdf_summary(
     pdf.set_font("Arial", "B", 12)
     pdf.cell(0, 10, "2.1 Glue Joint Parameters", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.cell(0, 8, f"Glue Manufacturer: {glueManufacturerSelected}", ln=True)
+    pdf.cell(0, 8, f"Manufacturer: {glueManufacturerSelected}", ln=True)
     pdf.cell(0, 8, f"Adhesive: {glueSelected}", ln=True)
     pdf.cell(0, 8, f"Design Glue Joint Resistance: {designGlueJointResistanceValue} N/mm²", ln=True)
     
-
     # Solar Panel
     pdf.cell(0, 8, "", ln=True)
     pdf.set_font("Arial", "B", 12)
@@ -227,10 +226,9 @@ def generate_pdf_summary(
     pdf.cell(0, 10, "2.4 Quantities", ln=True)
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, f"Total number of tubes: {int(numberTubes)}", ln=True)
-    pdf.cell(0, 8, f"Total number of tubes: {int(numberTubesFact)} (incl. 10%)", ln=True)
+    pdf.cell(0, 8, f"Total number of tubes: {float(numberTubesFact)} (incl. 10%)", ln=True)
     pdf.cell(0, 8, "Note: It is advised to consider a waste factor of 10%. " \
-    "The gluing thickness is considered as t = 5 mm", ln=True)
-
+    "The minimum gluing thickness is considered as t = {minThickness} mm", ln=True)
 
     # page break
     pdf.add_page()
