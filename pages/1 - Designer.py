@@ -34,7 +34,7 @@ st.write("")
 
 col1, col2 = st.columns([1,22])
 with col1:
-    st.image("images/icon1.png")
+    st.image("images/icon1.png", width=50)
 with col2:
     st.subheader("Pre-Assessment")
 
