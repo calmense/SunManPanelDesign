@@ -16,7 +16,7 @@ st.write("")
 # Section header with icon
 col1, col2 = st.columns([1, 15])
 with col1:
-    st.image("images/icon9.png")  # Optional, fills column
+    st.image("images/icon9.png", width=60)
 with col2:
     st.subheader("Completion and Maintenance")
 

@@ -19,7 +19,7 @@ def load_calculation_section(countries, windZones, imagesCountry,
     st.write("")
     col1, col2 = st.columns([1,22])
     with col1:
-        st.image("images/icon2.png")
+        st.image("images/icon2.png", width=50)
     with col2:
         st.subheader("Load Calculation")
 
