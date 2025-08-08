@@ -7,11 +7,11 @@ from utils.utils import add_text, draw_arrow
 def glue_resistance_section(wd, figBuilding):
 
 
-    glueManufacturer = ["Dow", "Sika", "Scott Bader", "Soudal", "Innotec"]
-    glueAdhesive = ["Dowsil 895", "Sika SG-20", "Crestabond M7-15", "Soudalbond 677", ["Versabond", "Membrane Adhesive", "Adheseal"]]
-    glueAdhesiveValue = [0.14, 0.17, 21.54, 3.8, [0.4, 1.4, 2.6]]
-    minWidthValues = [6, 5, 10, 30, 10]
-    minThicknessValues = [3, 3, 1, 3, 3, 3, 3]
+    glueManufacturer = ["Dow", "Scott Bader", "Soudal", "Innotec"]
+    glueAdhesive = ["Dowsil 895", "Crestabond M7-15", "Soudalbond 677", ["Versabond", "Membrane Adhesive", "Adheseal"]]
+    glueAdhesiveValue = [0.14, 21.54, 3.8, [0.4, 1.4, 2.6]]
+    minWidthValues = [6, 10, 30, 10]
+    minThicknessValues = [3, 1, 3, 3, 3, 3]
     
     st.write("")
     st.write("")
@@ -58,11 +58,10 @@ def glue_resistance_section(wd, figBuilding):
         st.write("")
         designGlueJointResistanceValue = round(glueValue / (1.3 * 1.6 * 1.0),2)
 
-        if glueManufacturerSelected in ["Dow", "Sika"]:
+        if glueManufacturerSelected in ["Dow"]:
             if glueSelected == "Dowsil 895":
                 designGlueJointResistanceValue = 0.14
-            elif glueSelected == "Sika SG-20":
-                designGlueJointResistanceValue = 0.17
+
 
             st.markdown(
                 '<b>Note:</b> The adhesive is <b>ETAG-approved</b>, so the design strength '

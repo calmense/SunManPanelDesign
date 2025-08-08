@@ -227,8 +227,10 @@ def generate_pdf_summary(
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 8, f"Total number of tubes: {int(numberTubes)}", ln=True)
     pdf.cell(0, 8, f"Total number of tubes: {float(numberTubesFact)} (incl. 10%)", ln=True)
-    pdf.cell(0, 8, "Note: It is advised to consider a waste factor of 10%. " \
-    "The minimum gluing thickness is considered as t = {minThickness} mm", ln=True)
+    pdf.cell(0, 8, (
+    f"Note: It is advised to consider a waste factor of 10%. "
+    f"The minimum gluing thickness is considered as t = {minThickness} mm"
+    ), ln=True)
 
     # page break
     pdf.add_page()
