@@ -218,7 +218,7 @@ def glue_resistance_section(wd, figBuilding):
         headers = ['F', 'G', 'H']
 
         # Calculate wk and wd based on coefficients
-        glueWidthReq = [round( abs(wdi) * (gluingDistance / 1000)/ (designGlueJointResistanceValue), 0) for wdi in wd]
+        glueWidthReq = [max(round( abs(wdi) * (gluingDistance / 1000)/ (designGlueJointResistanceValue), 0),1) for wdi in wd]
         glueWidthFinal = [int(max(glueWidthReq[x], minWidth)) for x in range(len(glueWidthReq))]   
 
         colHeader = ["Wind Load [N/mm2]", "Glue Width [mm]", "Glue Width [mm]"]
